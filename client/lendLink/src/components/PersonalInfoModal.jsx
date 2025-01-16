@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../styles/PersonalInfoModal.css";
+import "../styles/personalInfoModal.css";
 import { FaPencilAlt } from "react-icons/fa";
 import Loader from "./Loader";
 
