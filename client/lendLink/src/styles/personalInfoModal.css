@@ -160,9 +160,7 @@
     font-weight: bold;
     margin-top: 10px;
   }
-  
-  
-  /* Animations */
+   
   @keyframes fadeIn {
     from {
       opacity: 0;
