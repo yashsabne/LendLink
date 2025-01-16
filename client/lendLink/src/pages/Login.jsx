@@ -6,6 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import '../styles/auth.css';
 
 const Login = () => {
+
+  
+  const backendUrl = import.meta.env.VITE_FRONTEND_URL
+
+
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -22,7 +27,7 @@ const Login = () => {
     setIsLoading(true); 
 
     try {
-      const response = await fetch(`http://localhost:3001/auth/login`, {
+      const response = await fetch(`${backendUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

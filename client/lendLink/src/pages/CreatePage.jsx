@@ -6,7 +6,12 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 
+
 const CreateGroup = () => {
+
+  const backendUrl = import.meta.env.VITE_FRONTEND_URL
+
+  
   const [groupName, setGroupName] = useState("");
   const [monthlyContribution, setMonthlyContribution] = useState("");
   const [maxMembers, setMaxMembers] = useState("");
@@ -81,7 +86,7 @@ const CreateGroup = () => {
     try {
       setIsCreating(true)
     
-      const response = await fetch("http://localhost:3001/new-grp/create-new", {
+      const response = await fetch(`${backendUrl}/new-grp/create-new`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

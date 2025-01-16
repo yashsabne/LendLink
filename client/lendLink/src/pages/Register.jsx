@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "../styles/auth.css";
 
 const Register = () => {
+  
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -12,12 +13,12 @@ const Register = () => {
     password: "",
   });
   const [otp, setOtp] = useState("");
-  const [currentStep, setCurrentStep] = useState(0); // 0: Form, 1: OTP Verification
+  const [currentStep, setCurrentStep] = useState(0); 
   const [isLoading, setIsLoading] = useState(false);
   const [message, setmessage] = useState('');
   const navigate = useNavigate();
 
-  const backendUrl = "http://localhost:3001";
+  const backendUrl = import.meta.env.VITE_FRONTEND_URL
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;

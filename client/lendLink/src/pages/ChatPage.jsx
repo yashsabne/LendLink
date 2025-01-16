@@ -113,7 +113,7 @@ const ChatPage = () => {
     };
 
     const handleDeleteMsg = async (msgId) => {
-        const response = await fetch(`http://localhost:3001/handel-delete/${msgId}`, {
+        const response = await fetch(`${backendUrl}/handel-delete/${msgId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ msgId, groupId })
@@ -128,7 +128,7 @@ const ChatPage = () => {
     };
 
     const fetchMessages = async () => {
-        const response = await fetch(`http://localhost:3001/get-messages/${groupId}`);
+        const response = await fetch(`${backendUrl}/get-messages/${groupId}`);
         const data = await response.json();
 
         const deletedMessages = JSON.parse(localStorage.getItem('deletedMessages')) || [];
@@ -141,7 +141,7 @@ const ChatPage = () => {
     const spellCheck = async (text) => {
 
         try {
-            const response = await fetch(`http://localhost:3001/checkSpell/correct-text`, {
+            const response = await fetch(`${backendUrl}/checkSpell/correct-text`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text }),
@@ -172,7 +172,7 @@ const ChatPage = () => {
     };
 
     const getMemberDetails = async (groupId) => {
-        const response = await fetch(`http://localhost:3001/checkSpell/getmemberdetails`, {
+        const response = await fetch(`${backendUrl}/checkSpell/getmemberdetails`, {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ groupId })
@@ -204,9 +204,9 @@ const ChatPage = () => {
 
     const handleShowSuggestion = async () => {
         if (!correctedMessage) {
-            setSuggestionLoading(true); // Start loading
+            setSuggestionLoading(true); 
             await spellCheck(newMessage.trim());
-            setSuggestionLoading(false); // Stop loading after the suggestion is fetched
+            setSuggestionLoading(false);  
         }
         setShowSuggestion(!showSuggestion);
     };

@@ -11,6 +11,11 @@ import { useMediaQuery } from 'react-responsive';
 import Loader from "../components/Loader";
     
 const Dashboard = () => {
+
+  
+  const backendUrl = import.meta.env.VITE_FRONTEND_URL
+
+
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const userId = user?._id;
@@ -34,7 +39,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUserGroups = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/new-grp/dashUserDetails/${userId}`);
+        const response = await fetch(`${backendUrl}/new-grp/dashUserDetails/${userId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch group details");
         }
