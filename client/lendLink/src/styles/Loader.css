@@ -1,0 +1,51 @@
+.main-div-loader {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  .container-loader {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #ffffff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .loader {
+    border: 12px double rgb(71, 71, 232);
+    width: 100px;
+    height: 100px;
+    animation: spin 2s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      border-radius: 20%;
+      transform: rotate(0deg);
+    }
+    
+    50% {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+    }
+    
+    100% {
+      transform: rotate(360deg);
+      border-radius: 20%;
+    }
+  }
+  
+  .p-loader {
+    color: #fafafa;
+    font-family: courier;
+    font-size: 20px;
+    margin-top: 30px;
+    margin-left: 5px;
+  }

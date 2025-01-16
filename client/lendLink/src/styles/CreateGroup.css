@@ -1,0 +1,136 @@
+
+.create-group-container {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #f4f4f4; 
+    font-family: "Roboto", sans-serif;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 3rem auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+   
+  .create-group-container h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #e6e6e6;
+  }
+   
+  .create-group-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .create-group-form input,
+  .create-group-form select {
+    background-color: #2b2b2b;
+    color: #ffffff;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    padding: 0.9rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .create-group-form input:focus,
+  .create-group-form select:focus {
+    border-color: #0099ff;
+    box-shadow: 0 0 4px #0099ff;
+    outline: none;
+  }
+  
+  .paymentFrequency {
+    margin-right: 10px;
+  }
+   
+  .submit-button,
+  .add-member-button,
+  .remove-member-button {
+    background-color: #0099ff; 
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.8rem 1.4rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .submit-button:hover,
+  .add-member-button:hover,
+  .remove-member-button:hover {
+    background-color: #007acc; 
+    transform: translateY(-2px);
+  }
+
+  
+  .remove-member-button {
+    background-color: #e74c3c;  
+  }
+  
+  .remove-member-button:hover {
+    background-color: #c0392b;
+  }
+
+  .add-member-button[disabled] {
+    display: none;
+  }
+   
+  .member-row {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .member-row input {
+    flex: 1;
+  }
+   
+  .form-group label {
+    font-size: 0.9rem;
+    color: #cccccc;
+    margin-bottom: 0.5rem;
+  }
+  
+  label {
+    font-weight: 500;
+  }
+   
+  .error-message,
+  .success-message {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  
+  .error-message {
+    background-color: #e74c3c;
+    color: #ffffff;
+  }
+  
+  .success-message {
+    background-color: #27ae60;
+    color: #ffffff;
+  }
+   
+  @media (max-width: 768px) {
+    .create-group-container {
+      padding: 1.5rem;
+    }
+  
+    .create-group-container h1 {
+      font-size: 1.8rem;
+    }
+  
+    .member-row {
+      flex-direction: column;
+    }
+  }
+      

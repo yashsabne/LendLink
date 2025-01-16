@@ -1,0 +1,68 @@
+.detailed-info {
+    background: linear-gradient(to bottom, #f0f4f7, #d9e8f2);
+    padding: 1rem 1rem;
+     
+  }
+  
+  .info-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: floralwhite;
+  }
+  
+  .info-header {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 3rem;
+  }
+  
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+   
+  }
+  
+  .info-card {
+    background: #34506b;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .info-card:hover { 
+    box-shadow: 10px 6px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .info-icon  {
+    width: 30px;
+    height: 30px; 
+    padding: 5px;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+  }
+  
+  .info-title {
+    font-size: 1.5rem;
+    color: #2aba2a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .info-description {
+    font-size: 1rem;
+    color: floralwhite;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .info-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  

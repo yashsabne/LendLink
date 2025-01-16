@@ -1,0 +1,53 @@
+.yash-developers-page {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.yash-header {
+  text-align: center;
+  padding: 20px 0;
+  background-color: #282c34;
+  color: white;
+}
+
+.yash-title {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.yash-subtitle {
+  font-size: 1.2em;
+  font-weight: 300;
+}
+
+.features-works {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.yash-section-title {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #282c34;
+}
+
+.yash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.yash-card {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-weight: bold;
+}
+
+ 

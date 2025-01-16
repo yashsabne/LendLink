@@ -1,0 +1,105 @@
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 70vh;
+  overflow: hidden;
+  border-radius: 15px;  
+  margin: 20px;  
+
+ 
+}
+
+/* Video Background */
+.hero_video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.5);  
+  transform-origin: center;  
+  object-fit: cover;
+  z-index: 1; 
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 50%);  
+}
+
+/* Overlay */
+.hero_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(20deg, rgba(68, 57, 79, 0.9), rgba(53, 53, 117, 0.85), rgba(59, 59, 93, 0.95));
+  /* background: linear-gradient(0deg, rgba(00, 57, 100, 09), rgba(5, 153, 117, 0.85), rgba(59, 59, 93, 0.95)); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 2; /* Places the overlay above the video */
+  border-radius: 15px; /* Matches the hero section's rounded corners */
+}
+
+/* Hero Content */
+.hero_container {
+  color: #ffffff;
+  padding: 0 20px;
+  z-index: 3;
+}
+
+.hero_title {
+  font-size: 48px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Adds a shadow for text readability */
+}
+.hero_title span {
+  display: inline-block; /* Necessary for individual word animation */
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: #fff; /* Default color */
+}
+@media (max-width:600px) {
+  .hero_title {
+    font-size: 38px;
+  }
+  .hero_title span { 
+    font-size: 2.5rem;
+  }
+}
+.hero_description {
+  font-size: 1.2rem;
+  color: #ddd;
+}
+ 
+
+.hero_description {
+  font-size: 20px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+ 
+.hero_button {
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(45deg, #007acc, #00bfa6);  
+  border: none; 
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+  
+@media (max-width: 768px) {
+  .hero_title {
+    font-size: 32px;
+  }
+  .hero_description {
+    font-size: 16px;
+  }
+}

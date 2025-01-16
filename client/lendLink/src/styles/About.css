@@ -1,0 +1,102 @@
+.about { 
+  background: linear-gradient(to bottom, #d7d8d8, #d9e8f2);
+  color: #333;
+  padding: 2rem 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+.about_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+} 
+.about_section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem;
+}
+
+.about_content {
+  flex: 1;
+  text-align: left;
+}
+
+.about_media {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  
+}
+
+.about_header {
+  font-size: 2.5rem;
+  color: #2a5dba;
+  margin-bottom: 1rem;
+}
+
+.about_paragraph {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.about_features h3,
+.about_how-it-works h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2a5dba;
+}
+ 
+.about_image {
+  max-width: 90%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+}
+
+@media (max-width:500px) {
+  .model_media {
+    width: 300px;
+  }
+}
+.about_image:hover {
+  transform: scale(1.05);
+}
+  
+.about_steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.about_step {
+  flex: 1;
+  text-align: center;
+}
+
+.about_step-image {
+  max-width: 100px;
+  margin-bottom: 0.5rem;
+}
+
+.about_step p {
+  font-size: 1rem;
+  color: #555;
+}
+ 
+@media (max-width: 768px) {
+  .about_section {
+    flex-direction: column;
+  }
+
+  .about_media {
+    justify-content: flex-start;
+  }
+
+  .about_steps {
+    flex-direction: column;
+  }
+}

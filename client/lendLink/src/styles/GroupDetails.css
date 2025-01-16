@@ -1,0 +1,434 @@
+.body-main {
+  background: linear-gradient(185deg, #07103e, #000000);
+}
+
+.group-details {
+  max-width: 1200px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 8px 10px rgba(200, 181, 181, 0.15);
+  overflow: hidden;
+}
+
+.group-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 10px; 
+}
+
+.group-name {
+  font-size: 36px;
+  color: #18dcea; 
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.group-dates,
+.total-money {
+  font-size: 16px;
+  color: #fff; 
+  margin: 5px 0; 
+}
+
+.group-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.members-section,
+.progress-section {
+  background: linear-gradient(135deg, #7f7b7b, #373738);
+  border-radius: 16px;
+  padding: 15px;
+  flex: 1;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.member-list {
+  list-style: none;
+  padding: 0;
+}
+
+.member-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 8px 5px 8px;
+  margin-bottom: 15px; 
+  border-radius: 12px;
+  background: #413a3a;
+  transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.member-card:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+}
+
+.member-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: #00d9ff;
+  padding: 2px 3px 2px 3px;
+
+}
+.member-contribution {
+  padding: 2px 3px 2px 3px;
+  color: #fff;
+}
+
+.progress-bar-container {
+  background: #ffffff;
+  height: 14px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 20px 0;
+  position: relative;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, #2563eb, #1d4ed8); 
+  height: 100%;
+  transition: width 0.4s ease-in-out;
+}
+
+.link-bank-hover-container {
+  position: relative;
+}
+
+.link-bank-container {
+  display: none;
+  position: absolute;
+  top: 20px;
+  left: 0;
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 250px;
+}
+
+.link-bank-hover-container:hover .link-bank-container {
+  display: block;
+}
+
+.link-btn-ac {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.link-btn-ac:hover {
+  background-color: #0056b3;
+}
+
+.span-text-link {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  color: #8c8c8c;
+}
+.pay-button {
+  background-color: #9ca3af; 
+  color: #1d4ed8; 
+  border: none; 
+  padding: 10px 20px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+
+}
+
+.pay-button:disabled {
+  background-color: #bdbdbd; 
+  cursor: not-allowed; 
+  box-shadow: none; 
+}
+
+.pay-button:hover:not(:disabled) {
+  background-color: #45a049; 
+  transform: scale(1.05); 
+}
+
+.pay-dates-calender {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  padding: 10px 20px;  
+}
+
+.pay-dates-calender h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #e0e0e0; 
+  font-weight: 600; 
+}
+
+.pay-dates-calender button {
+  display: flex;
+  align-items: center;
+  gap: 10px;  
+  padding: 05px 10px;  
+  border: none;
+  border-radius: 6px; 
+  color: #ffffff; 
+  font-size: 0.7rem;  
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(90deg, #4a90e2, #ff4b47, #fdbb2d, #4caf50);
+  background-size: 300% 300%;  
+
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+  
+}
+
+.pay-dates-calender button:hover {
+  background-color: #388e3c;
+  animation: gradientShift 2s ease infinite;
+}
+
+.pay-dates-calender button img {
+  height: 24px;  
+  width: auto;
+}
+
+.pay-dates-calender button:disabled {
+  background-color: #888888; 
+  cursor: not-allowed;
+}
+
+ 
+
+
+.success-badge-grp,.error-badge-grp {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  animation: fadeInOut 3s ease-in-out forwards;  
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px);top:-20px }
+}
+
+.error-badge-grp {
+  background-color: rgb(227, 34, 34);
+}
+
+
+.payment-dates {
+  margin-top: 20px;
+  background-color: #9e9c9c;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px; 
+}
+
+.upcoming-dates {
+  display: flex;
+  justify-content: space-evenly; 
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.payment-dates h4 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 18px;
+}
+
+.upcoming-dates ul { 
+  padding: 0;
+  margin: 0;
+}
+
+.payment-date-item { 
+  border-bottom: 1px solid #eee;
+  background-color: #e0f7fa; 
+  color: #00796b; 
+  padding: 4px 10px; 
+  border-radius: 16px; 
+  font-size: 14px; 
+  font-weight: 500; 
+  display: inline-block; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  transition: background-color 0.3s ease, transform 0.2s ease; 
+  &:hover {
+    background-color: #b2ebf2; 
+    transform: scale(1.05);  
+    cursor: pointer;
+  }
+}
+
+.payment-date-item:last-child {
+  border-bottom: none;
+}
+
+.payment-date {
+  color: #4caf50;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.winner-button,.give-amount-winner {
+  display: inline-block;
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  color: #ffffff; 
+  font-weight: 600;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.give-amount-winner {
+  position: relative;
+  left: 40%;
+  padding: 8px;
+  margin-right: 10px; 
+}
+ 
+.winner-button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #1d4ed8, #2563eb); 
+}
+
+.winner-button:disabled,.give-amount-winner:disabled {
+  background: #9ca3af;  
+  cursor: not-allowed; 
+}
+
+.winner-animation {
+  font-size: 18px;
+  color: #374151; 
+  margin-top: 15px;
+}
+
+.winner-result {
+  text-align: center;
+  background: #fef3c7;
+  color: #b45309;  
+  padding: 10px;
+  margin-top: 20px;
+  border-radius: 12px;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.delete-btn-group {
+  position: relative;
+  top: 20px; 
+  background-color: #f44336; 
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-btn-group:hover {
+  background-color: #d32f2f;  
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);  
+}
+
+.delete-btn-group:active {
+  background-color: #b71c1c; 
+  transform: translateY(0); 
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.group-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 30px;
+  border-top: 2px solid #e5e7eb;
+  padding-top: 20px;
+}
+
+.faq-section h3,
+.next-action-section h3 {
+  font-size: 22px;
+  color: #fdfdfd; 
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.faq-section p,
+.next-action-section p {
+  font-size: 16px;
+  color: #fdfdfd; 
+}
+
+.back-button {
+  color: #2563eb; 
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease-in-out;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+  color: #1d4ed8; 
+}
+
+.admin-btn {   
+  color: #282727;
+  font-size: medium;
+  padding: 7px; 
+  border-radius: 10px; 
+  box-shadow: 0px 0px 3px lightblue;
+  font-size: small;
+  
+
+
+}
+
+.chat-button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  color: white;
+  background-color: transparent;
+  border: 1px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.chat-button:hover {
+border-radius: 30px; 
+}

@@ -1,0 +1,211 @@
+ 
+.nav-h {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%; 
+}
+
+.nav-h_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto; 
+  padding: 0;
+}
+
+.nav-h_logo {
+  font-size: 24px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  color: #ffffff;
+  cursor: pointer;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+
+.nav-h_logo:hover {
+  transform: scale(1.1);
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+}
+
+.nav-h_nav {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.nav-h_link {
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: #f5f5f5;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.nav-h_link:hover {
+  color: #d4af37;
+}
+
+.nav-h_link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: #d4af37;
+  transition: width 0.3s ease;
+}
+
+.nav-h_link:hover::after {
+  width: 100%;
+}
+
+.nav-h_buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-h_button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #f5f5f5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+ 
+
+.nav-h_button--primary {
+  background-color: #d4af37;
+  color: #16213e;
+  box-shadow: 0 2px 6px rgba(212, 175, 55, 0.4);
+}
+
+.nav-h_button--primary:hover {
+  background-color: #b3952e;
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.6);
+}
+ 
+.nav-h_hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.nav-h_hamburger span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background-color: #ffffff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+ 
+.nav-h_hamburger:hover span {
+  transform: scale(1.1);
+  background-color: #d4af37;
+}
+   
+@media (max-width: 768px) {
+  .nav-h_nav {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: #16213e;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-h_nav--open {
+      display: flex;
+      animation: slideDown 0.4s ease forwards;
+  }
+
+  @keyframes slideDown {
+      from {
+          transform: translateY(-20%);
+          opacity: 0;
+      }
+      to {
+          transform: translateY(0);
+          opacity: 1;
+      }
+  }
+
+  .nav-h_hamburger {
+      display: flex;
+  }
+}
+ 
+@media (max-width: 768px) {
+  .nav-h_container {
+      padding: 10px;
+  }
+
+  .nav-h_logo {
+      font-size: 20px; 
+  }
+
+  .nav-h_link {
+      font-size: 14px;  
+  }
+
+  .nav-h_buttons {
+      gap: 10px;  
+  }
+
+  .nav-h_button {
+      padding: 8px 16px;  
+  }
+}
+ 
+@media (max-width: 1100px) {
+  .nav-h_container {
+      padding: 5px 20px;
+  }
+
+  .nav-h_logo {
+      font-size: 22px;
+  }
+
+  .nav-h_link {
+      font-size: 15px;
+  }
+
+  .nav-h_buttons {
+      gap: 12px;
+  }
+
+  .nav-h_button {
+      padding: 9px 18px;
+  }
+}
+ 
+.nav-h_nav {
+    transition: all 0.4s ease-in-out;
+}
+ 
+.nav-h_hamburger {
+    gap: 4px;  
+}
+
+.nav-h_hamburger span {
+    width: 22px;  
+    height: 2.5px;
+}
