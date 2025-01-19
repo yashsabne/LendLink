@@ -86,7 +86,7 @@
 ## 🔥 Screenshots
 
 ### 💬 Real-Time Chat
-![Chat Feature](https://via.placeholder.com/800x400?text=Chat+Feature)
+![Chat Feature](https://github.com/yashsabne/LendLink/blob/main/Screenshot%202025-01-19%20184936.png?raw=true)
 
 ### 🛠️ Dashboard Section
 ![Dashboard Section](https://github.com/yashsabne/LendLink/blob/main/Screenshot%202025-01-19%20185520.png?raw=true)
