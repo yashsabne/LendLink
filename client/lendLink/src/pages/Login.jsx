@@ -53,7 +53,7 @@ const Login = () => {
       }
     } catch (err) {
       console.log("Login failed", err.message);
-      setIsLoading(false); // Stop loading on error
+      setIsLoading(false); 
     }
   };
 

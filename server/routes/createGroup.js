@@ -134,8 +134,9 @@ router.get("/group/:groupId", async (req, res) => {
     try {
       const { groupId } = req.params;
       const group = await Group.findById(groupId).populate("members");
+      
       if (!group) {
-        return res.status(404).json({ message: "Group not found" });
+        return res.status(404).json({ message: "Group not found",success:false });
       }
       res.json(group);
     } catch (err) {
@@ -268,28 +269,35 @@ router.post('/group/:groupId/:userId', async (req,res) => {
 
 router.post('/delete-group-permanent', async (req, res) => {
   try {
-    const { groupId,userId } = req.body;
+    const { groupId, userId } = req.body;
 
     if (!groupId) {
       return res.status(400).json({ message: 'groupId is required', success: false });
     }
     if (!userId) {
       return res.status(400).json({ message: 'userId is required', success: false });
-    }
-
+    } 
     const group = await Group.findByIdAndDelete(groupId);
-    const user  = await User.findById(userId);
-
-    if (!user) {
-      return res.status(404).json({ message: 'user not found', success: false });
+    if (!group) {
+      return res.status(404).json({ message: 'Group not found', success: false });
     }
+ 
+    const grpMembers = group.members;
+    await Promise.all(
+      grpMembers.map(async (member) => {
+        const user = await User.findById(member.userId);
+        if (user) {
+          user.groups = user.groups.filter((group) => group.groupId.toString() !== groupId);
+          await user.save();
+        }
+      })
+    );
 
-    user.groups = user.groups.filter((group) => group.groupId.toString() !== groupId);
-
-    await user.save();
-
-    return res.status(200).json({groupName:`${group.name}`, message: 'Group successfully deleted see you soon', success: true });
-
+    return res.status(200).json({
+      groupName: `${group.name}`,
+      message: 'Group successfully deleted. See you soon!',
+      success: true,
+    });
   } catch (error) {
     console.error('Error deleting group:', error);
     return res.status(500).json({ message: 'Internal server error', success: false });

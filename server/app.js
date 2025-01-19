@@ -20,9 +20,9 @@ const savingVideo = require("./routes/savingVideo.js")
 const contactMe = require('./routes/contactme.js')
 const app = express();
 
-
 app.use(cors({
-  origin: process.env.BASE_FRONTEND_URL || 'http://localhost:5173',
+  origin: ['http://localhost:5173', 'https://lend-link-six.vercel.app'],    
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  
   credentials: true,
 }));
 
@@ -256,8 +256,6 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
 
-
-
   socket.on('joinGroup', async (groupId) => {
     try {
       socket.join(groupId);
@@ -273,7 +271,6 @@ io.on('connection', (socket) => {
     if(!userId) {
       res.status(404).json({ message: 'userId not found', success: false })
     }
-
     if (!groupId) {
       res.status(404).json({ message: 'groupId not found', success: false })
     }

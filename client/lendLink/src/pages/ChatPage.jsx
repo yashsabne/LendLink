@@ -14,6 +14,8 @@ import Header from '../components/Header';
 const backendUrl = import.meta.env.VITE_FRONTEND_URL
 
 
+
+
 const socket = io(`${backendUrl}`);
 
 const ChatPage = () => {
@@ -30,17 +32,17 @@ const ChatPage = () => {
     const [showSuggestion, setShowSuggestion] = useState(false);
     const [autoCorrect, setAutoCorrect] = useState(false);
     const [suggestionLoading, setSuggestionLoading] = useState(false);
+    const [loading, setloading] = useState(true);
 
     const navigate = useNavigate();
     const userId = user._id;
     const chatWindowRef = useRef(null);
 
     useEffect(() => {
-
-
         getMemberDetails(groupId);
 
         const checkUserEligibleToReadChat = async (groupId, userId) => {
+            setloading(true);
             try {
                 const response = await fetch(`${backendUrl}/check-for-eligible`, {
                     method: 'POST',
@@ -50,12 +52,14 @@ const ChatPage = () => {
 
                 const data = await response.json();
                 setUserEligibleToChat(data.success);
+                setloading(false)
             } catch (error) {
                 console.log(error);
             }
         };
 
         checkUserEligibleToReadChat(groupId, userId);
+
         socket.emit('joinGroup', groupId);
         fetchMessages();
 
@@ -204,14 +208,14 @@ const ChatPage = () => {
 
     const handleShowSuggestion = async () => {
         if (!correctedMessage) {
-            setSuggestionLoading(true); 
+            setSuggestionLoading(true);
             await spellCheck(newMessage.trim());
-            setSuggestionLoading(false);  
+            setSuggestionLoading(false);
         }
         setShowSuggestion(!showSuggestion);
     };
 
- 
+
 
     return (
         <>
@@ -226,7 +230,13 @@ const ChatPage = () => {
                         {theme === 'light' ? <MdDarkMode /> : <CiLight />} Mode
                     </button>
 
-                    {userEligibleToChat ? (
+
+
+                    {loading ? (
+                        <p style={{ textAlign: 'center', marginTop: '50px', fontWeight: 'bold' }}>
+                            Checking eligibility....
+                        </p>
+                    ) : userEligibleToChat ? (
                         <>
                             <div className={`chat-window ${theme}`} ref={chatWindowRef}>
                                 {messages.length === 0 ? (
@@ -276,7 +286,7 @@ const ChatPage = () => {
                                 <div onClick={sendMessage} className="send-button" role="button">
                                     <IoIosSend />
                                 </div>
-                                <label className='enable_auto_correct' >
+                                <label className='enable_auto_correct'>
                                     <input
                                         type="checkbox"
                                         checked={autoCorrect}
@@ -285,7 +295,11 @@ const ChatPage = () => {
                                     Auto-Correct
                                 </label>
                             </div>
-                            <button className="suggestion-button" onClick={handleShowSuggestion} disabled={suggestionLoading || !newMessage.trim()} >
+                            <button
+                                className="suggestion-button"
+                                onClick={handleShowSuggestion}
+                                disabled={suggestionLoading || !newMessage.trim()}
+                            >
                                 {suggestionLoading
                                     ? 'Fetching Suggestion...'
                                     : showSuggestion
@@ -294,7 +308,7 @@ const ChatPage = () => {
                             </button>
                             {showSuggestion && correctedMessage && (
                                 <div className={`suggestion-box ${showSuggestion ? 'show' : ''}`}>
-                                    <p>Suggested: {correctedMessage}  <button className='copy-suggestion' onClick={() => handleCopy(correctedMessage)} >{copyAlert ? 'Copied' : 'Copy'}</button>  </p>
+                                    <p>Suggested: {correctedMessage} <button className='copy-suggestion' onClick={() => handleCopy(correctedMessage)}>{copyAlert ? 'Copied' : 'Copy'}</button></p>
                                 </div>
                             )}
                         </>
@@ -310,6 +324,7 @@ const ChatPage = () => {
                             </div>
                         </>
                     )}
+
                 </div>
 
 
@@ -324,7 +339,7 @@ const ChatPage = () => {
                         <ul>
                             {groupMembers.length > 0 ? (
                                 groupMembers.map((member, index) => (
-                                    
+
                                     <li key={index} className={`${theme} ${member.userId == userId ? 'goldenColor' : ''}`}>
                                         {member.name} - {member.email}
                                     </li>

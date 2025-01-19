@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "../styles/Dashboard.css";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
 import gsap from "gsap";
 import PersonalInfoModal from "../components/PersonalInfoModal"; 

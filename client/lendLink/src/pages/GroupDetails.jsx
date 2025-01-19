@@ -52,7 +52,7 @@ const [nameOfWinner, setnameOfWinner] = useState('');
         }
         const data = await response.json();
 
-        setGroupDetails(data);
+          setGroupDetails(data);
 
         const calculatedEndDate = calculateEndDate(data.createdAt, data.members.length);
         setEndDate(calculatedEndDate.toISOString().split("T")[0]);
@@ -475,7 +475,15 @@ const [nameOfWinner, setnameOfWinner] = useState('');
 
 
   const deleteGroup = async (groupId) => {
+
     try {
+
+      const confirmDelete = window.confirm("DO you want to delete this group permanently if you have done any paymnent so pplease don't delete");
+
+      if(!confirmDelete) {
+        return;
+      }
+
       const response = await fetch(`${backendUrl}/new-grp/delete-group-permanent`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },

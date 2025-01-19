@@ -32,7 +32,7 @@ const Footer = () => {
            </div>
       </div>
       <div className="footer_bottom">
-        <p>&copy; 2024 LendLink. Made with ❤️ by a yash sabne exploring advanced web-D.</p>
+        <p>&copy; 2025 LendLink. Made with ❤️ by a yash sabne exploring advanced web-D.</p>
       </div>
     </footer>
   );
