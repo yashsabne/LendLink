@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../styles/PersonalInfoModal.css";
+
+import "../styles/personalInfoModal.css";
 
 import { FaPencilAlt } from "react-icons/fa";
 import Loader from "./Loader";
@@ -8,7 +9,6 @@ const PersonalInfoModal = ({ isOpen, onClose, userId }) => {
   if (!isOpen) return null;
 
   const backendUrl = import.meta.env.VITE_FRONTEND_URL
-
 
   const [userData, setUserData] = useState(null);  
   const [loading, setLoading] = useState(false);
