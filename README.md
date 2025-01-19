@@ -92,7 +92,7 @@
 ![Dashboard Section](https://github.com/yashsabne/LendLink/blob/main/Screenshot%202025-01-19%20185520.png?raw=true)
 
 ###  Group Details
-![Group Details](https://via.placeholder.com/800x400?text=Dark+Mode)
+![Group Details](https://github.com/yashsabne/LendLink/blob/main/Screenshot%202025-01-19%20185542.png?raw=true)
 
 ---
 
