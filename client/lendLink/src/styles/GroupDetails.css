@@ -1,5 +1,5 @@
 .body-main {
-  background: linear-gradient(185deg, #07103e, #000000);
+  background: linear-gradient(185deg, #e0e7ff, #f5f7fa); /* Soft blue to light gray */
 }
 
 .group-details {
@@ -7,7 +7,8 @@
   margin: auto;
   padding: 10px;
   border-radius: 16px;
-  box-shadow: 0 8px 10px rgba(200, 181, 181, 0.15);
+  background: #ffffff; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
   overflow: hidden;
 }
 
@@ -19,17 +20,16 @@
 
 .group-name {
   font-size: 36px;
-  color: #18dcea; 
+  color: #3b5998;  
   font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }
 
 .group-dates,
 .total-money {
-  font-size: 16px;
-  color: #fff; 
   margin: 5px 0; 
+  font-size: 16px;
+  color: #4a4a4a;  
 }
 
 .group-main {
@@ -41,11 +41,11 @@
 
 .members-section,
 .progress-section {
-  background: linear-gradient(135deg, #7f7b7b, #373738);
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6); 
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   padding: 15px;
-  flex: 1;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  flex: 1; 
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -61,12 +61,14 @@
   padding: 5px 8px 5px 8px;
   margin-bottom: 15px; 
   border-radius: 12px;
-  background: #413a3a;
+  background: #f5f5f5 ;
+  color: #4a4a4a; 
   transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .member-card:hover {
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
+  background: #e0e7ff;  
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .member-name {
@@ -75,17 +77,17 @@
   align-items: center;
   font-size: 18px;
   font-weight: 600;
-  color: #00d9ff;
+  color: #2c3e50;
   padding: 2px 3px 2px 3px;
 
 }
 .member-contribution {
   padding: 2px 3px 2px 3px;
-  color: #fff;
+  color: #212121;
 }
 
 .progress-bar-container {
-  background: #ffffff;
+  background: #e5e5e5;
   height: 14px;
   border-radius: 8px;
   overflow: hidden;
@@ -94,7 +96,7 @@
 }
 
 .progress-bar {
-  background: linear-gradient(90deg, #2563eb, #1d4ed8); 
+  background: linear-gradient(90deg, #5a67d8, #4c51bf); 
   height: 100%;
   transition: width 0.4s ease-in-out;
 }
@@ -122,7 +124,7 @@
 }
 
 .link-btn-ac {
-  background-color: #007bff;
+  background-color: #434190;
   border: none;
   color: white;
   padding: 8px 12px;
@@ -133,7 +135,7 @@
 }
 
 .link-btn-ac:hover {
-  background-color: #0056b3;
+  background-color: #434190;
 }
 
 .span-text-link {
@@ -143,8 +145,8 @@
   color: #8c8c8c;
 }
 .pay-button {
-  background-color: #9ca3af; 
-  color: #1d4ed8; 
+  background-color: #00796b; 
+  color: #ffffff;
   border: none; 
   padding: 10px 20px; 
   cursor: pointer; 
@@ -159,8 +161,8 @@
 }
 
 .pay-button:hover:not(:disabled) {
-  background-color: #45a049; 
-  transform: scale(1.05); 
+  background-color: #025f54;
+  transform: scale(1.02); 
 }
 
 .pay-dates-calender {
@@ -189,20 +191,14 @@
   font-size: 0.7rem;  
   font-weight: 500;
   cursor: pointer;
-  background: linear-gradient(90deg, #4a90e2, #ff4b47, #fdbb2d, #4caf50);
+  background: linear-gradient(90deg, #5a67d8, #4c51bf);
   background-size: 300% 300%;  
 
 }
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-  
-}
+ 
 
 .pay-dates-calender button:hover {
-  background-color: #388e3c;
-  animation: gradientShift 2s ease infinite;
+  background-color: #434190;
 }
 
 .pay-dates-calender button img {
@@ -215,31 +211,30 @@
   cursor: not-allowed;
 }
 
- 
 
 
 .success-badge-grp,.error-badge-grp {
   position: fixed;
-  top: 20px;
+  top: 100px;
   right: 20px;
-  background-color: #4caf50;
+  background-color: #38a169;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   font-size: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  animation: fadeInOut 3s ease-in-out forwards;  
+  animation: fadeInOut 10s ease forwards;  
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-20px); }
+  0% { opacity: 0; transform: translateY(-60px); }
   10%, 90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-20px);top:-20px }
+  100% { opacity: 0; transform: translateY(-60px);top:-60px }
 }
 
 .error-badge-grp {
-  background-color: rgb(227, 34, 34);
+  background-color: #e53e3e;
 }
 
 
@@ -298,7 +293,7 @@
 
 .winner-button,.give-amount-winner {
   display: inline-block;
-  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  background: linear-gradient(90deg, #5a67d8, #4c51bf); 
   color: #ffffff; 
   font-weight: 600;
   padding: 8px 16px;
@@ -316,7 +311,7 @@
 }
  
 .winner-button:hover:not(:disabled) {
-  background: linear-gradient(90deg, #1d4ed8, #2563eb); 
+  background: #434190;
 }
 
 .winner-button:disabled,.give-amount-winner:disabled {
@@ -354,6 +349,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: none;
 }
 
 .delete-btn-group:hover {
@@ -381,7 +377,7 @@
 .faq-section h3,
 .next-action-section h3 {
   font-size: 22px;
-  color: #fdfdfd; 
+  color: #2d3748;
   margin-bottom: 15px;
   text-transform: uppercase;
   font-weight: 700;
@@ -390,11 +386,11 @@
 .faq-section p,
 .next-action-section p {
   font-size: 16px;
-  color: #fdfdfd; 
+  color: #2d2d2d; 
 }
 
 .back-button {
-  color: #2563eb; 
+  color: #5a67d8;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease-in-out;
@@ -402,7 +398,7 @@
 
 .back-button:hover {
   text-decoration: underline;
-  color: #1d4ed8; 
+  color: #434190; 
 }
 
 .admin-btn {   
@@ -421,7 +417,7 @@
   padding: 10px 15px;
   font-size: 1rem;
   color: white;
-  background-color: transparent;
+  background-color: rgb(0, 81, 212);
   border: 1px solid gray;
   border-radius: 5px;
   cursor: pointer;

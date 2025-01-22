@@ -354,7 +354,7 @@ const ChatPage = () => {
                             <li><small className={`${theme}`} >auto correct takes the delay of 1.5sec <b> (feature is in work)</b>   </small></li>
                             <li> <small className={`${theme}`} >enter the message and click the below <b>"suggestion for your text"</b> button to correct text</small></li>
                             <li><small className={`${theme}`}>hover on message or click on message to get options tools.</small></li>
-                            <li><small className={`${theme}`}>gold border denotes the badge of you.</small></li>
+                            
                         </ul>
                     </div>
                 </div>}

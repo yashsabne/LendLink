@@ -234,12 +234,15 @@ const Dashboard = () => {
             <div className="dash-insight-notification">
               <h3>Notification Center</h3>
               <ul>
-                {  notifications.slice(0,5).map((notification, i) => (
-                  <li className="notification-list" key={i}>
-                    {notification.message}{" "}
-                    <small>at {new Date(notification.timestamp).toLocaleDateString()}</small>
-                  </li>
-                ))}
+              {notifications.length === 0 ? 'No notifications' : 
+  notifications.slice(0, 10).map((notification, i) => (
+    <li className="notification-list" key={i}>
+      {notification.message}{" "}
+      <small>at {new Date(notification.timestamp).toLocaleDateString()}</small>
+    </li>
+  ))
+}
+
                 
               </ul>
             </div>
