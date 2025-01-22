@@ -476,31 +476,32 @@ const [nameOfWinner, setnameOfWinner] = useState('');
 
   const deleteGroup = async (groupId) => {
 
-    try {
+    alert(`currently we are facing error for deleting group with id ${groupId} `)
+    // try {
 
-      const confirmDelete = window.confirm("DO you want to delete this group permanently if you have done any paymnent so pplease don't delete");
+    //   const confirmDelete = window.confirm("DO you want to delete this group permanently if you have done any paymnent so pplease don't delete");
 
-      if(!confirmDelete) {
-        return;
-      }
+    //   if(!confirmDelete) {
+    //     return;
+    //   }
 
-      const response = await fetch(`${backendUrl}/new-grp/delete-group-permanent`, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ groupId: groupId, userId: userId })
-      })
-      const data = await response.json();
-      console.log(data);
+    //   const response = await fetch(`${backendUrl}/new-grp/delete-group-permanent`, {
+    //     method: 'POST',
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ groupId: groupId, userId: userId })
+    //   })
+    //   const data = await response.json();
+    //   console.log(data);
 
-      if (data) {
-        if (data.success) {
-          navigate(`/dashboard?groupDeleted=${data.success}&goupName=${data.groupName}&${data.message}`)
-        }
-      } 
+    //   if (data) {
+    //     if (data.success) {
+    //       navigate(`/dashboard?groupDeleted=${data.success}&goupName=${data.groupName}&${data.message}`)
+    //     }
+    //   } 
 
-    } catch (error) {
-      console.log(error)
-    }
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
 
