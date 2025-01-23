@@ -38,6 +38,10 @@ const YashDevelopersPage = () => {
   <p>LendLink aims to promote financial inclusion by providing an easy and secure way for users to access loans, fostering trust and mutual support within communities.</p>
 </div>
 
+ <div>
+  <h2>Visit portfolio <a href='https://3d-portfolio-roan-nine.vercel.app/' target='_blank' >Click here</a> </h2>
+ </div>    
+
     
   <Footer/>
   </>
