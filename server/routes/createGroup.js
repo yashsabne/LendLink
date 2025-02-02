@@ -378,7 +378,7 @@ router.post('/confirm-join', async (req, res) => {
 
     user.notifications.push({
       message: `You have a request for approval from a member. 
-      <a target="_blank" href="http://localhost:5173/approve-request?groupId=${groupId}&userId=${userId}" 
+      <a target="_blank" href="https://lend-link-six.vercel.app/approve-request?groupId=${groupId}&userId=${userId}" 
          style="color: salmon; text-decoration: underline;">
          Click here
       </a> to approve.`,
@@ -449,7 +449,7 @@ router.post('/approve-user', async (req, res) => {
       return res.status(400).json({ message: 'User is already a member',sucess:false });
     }
 
-    if(grpMaxMembers<currGrpMembers) {
+    if( currGrpMembers < grpMaxMembers ) {
       group.members.push({
         userId: userId,
         name: user.name,
