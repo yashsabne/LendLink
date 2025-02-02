@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const GroupSchema = new mongoose.Schema(
   {
-    groupCode: {type:String, required:true,  unique: true, },
+    groupCode: {type:String, required:true,  unique: true, }, //grpCode
     name: { type: String, required: true },
     admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     adminName:{type:String},

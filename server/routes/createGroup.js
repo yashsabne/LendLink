@@ -23,7 +23,8 @@ router.post("/create-new", async (req, res) => {
       return `${randomString}yash${timestamp}`; 
   }
   const groupCode = generateGroupCode();
- 
+
+  //grpcode
 
     const newGroup = new Group({
       groupCode,
