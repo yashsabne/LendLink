@@ -34,7 +34,7 @@ const AddMembersModal = ({ isModalOpenAddMem, closeModal }) => {
     return (
         <div className="modal-addMem">
             <div className="modal-addMem-content">
-                <h3 style={{display:'flex',justifyContent:'space-between',marginBottom:'20px'}} >Add Members    <button
+                <h3 style={{display:'flex',justifyContent:'space-between',marginBottom:'20px'}} >Feature not integrated to backend for now    <button
                     type="button"
                     onClick={closeModal}
                     className="close-modal-btn"
