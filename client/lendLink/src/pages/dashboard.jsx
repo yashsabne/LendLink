@@ -342,7 +342,7 @@ const Dashboard = () => {
               >
                 <input
                   type="text"
-                  placeholder="currently this feature is in work"
+                  placeholder="Enter the invite code"
                   value={groupIdJoin}
                   onChange={(e) => setGroupId(e.target.value)}
                   className="dash-input"
