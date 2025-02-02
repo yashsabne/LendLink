@@ -24,7 +24,6 @@ const CreateGroup = () => {
   const user = useSelector((state) => state.user);
   const adminId = user?._id;
  
- 
   const params = new URLSearchParams(window.location.search);
   const grpname = params.get("grpname");
 
@@ -134,7 +133,7 @@ const CreateGroup = () => {
           />
           <input
             type="number"
-            placeholder="Maximum Members"
+            placeholder="Maximum Members: (Once it sets it cannot be changed later)"
             value={maxMembers}
             onChange={(e) => setMaxMembers(e.target.value)}
             required
@@ -147,7 +146,7 @@ const CreateGroup = () => {
             required
           />
 
-          <h3>Add Members</h3>
+          <h3>Add Members <small style={{color:'grey'}} >(you can add now or later you can send link join group to only max members)</small> </h3>
           <small>you need to add you as member and same email as registered to our account </small>
           {members.map((member, index) => (
             <div key={index} className="member-row">
@@ -185,7 +184,7 @@ const CreateGroup = () => {
             Add Member
           </button>
 
-          <button type="submit" className="submit-button">
+          <button type="submit" className="submit-button" disabled={isCreating} >
            {isCreating?'Creating Group':'Create Group' } 
           </button>
         </form>

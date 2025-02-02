@@ -22,8 +22,7 @@ router.post("/send-otp-email", async (req, res) => {
 
     const otp = Math.floor(100000 + Math.random() * 900000);
     otpHolder[email] = otp;
-
-    console.log(otp)
+ 
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
@@ -84,6 +83,7 @@ router.post("/register", async (req, res) => {
   })
   .then((message) => console.log(`Message SID: ${message.sid}`))
   .catch((error) => console.error(error));
+  
 
     await newUser.save();
     res.status(200).json({ message: "User registered successfully!", user: newUser });

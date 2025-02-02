@@ -9,6 +9,7 @@ import GroupDetails from "./pages/GroupDetails";
 import CreateGroup from "./pages/CreatePage";
 import ChatPage from "./pages/ChatPage";
 import YashDevelopersPage from "./pages/Developers";
+import ApproveRequest from "./pages/ApproveRequest.jsx";
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
           <Route path="/create-new-group" element= {<CreateGroup/>} />
           <Route path="/chat/:groupId" element={<ChatPage />} />
           <Route path="/YashDevelopersPage" element={<YashDevelopersPage/>} />
+          <Route path="/approve-request" element={<ApproveRequest/>} />
         </Routes>
  
       </BrowserRouter>

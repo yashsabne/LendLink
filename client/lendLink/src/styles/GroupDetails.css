@@ -1,35 +1,43 @@
 .body-main {
-  background: linear-gradient(185deg, #e0e7ff, #f5f7fa); /* Soft blue to light gray */
+  background: linear-gradient(185deg, #e0e7ff, #f5f7fa);
 }
 
 .group-details {
   max-width: 1200px;
-  margin: auto;
+  margin: 10px auto;
   padding: 10px;
   border-radius: 16px;
-  background: #ffffff; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 .group-header {
   text-align: center;
   margin-bottom: 30px;
-  padding-bottom: 10px; 
+  padding-bottom: 10px;
 }
 
 .group-name {
   font-size: 36px;
-  color: #3b5998;  
+  color: #3b5998;
   font-weight: 700;
   text-transform: capitalize;
+  text-align: center;
 }
 
 .group-dates,
 .total-money {
-  margin: 5px 0; 
+  margin: 5px 0;
   font-size: 16px;
-  color: #4a4a4a;  
+  color: #4a4a4a;
+}
+
+.top-grp-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: start;
 }
 
 .group-main {
@@ -41,11 +49,11 @@
 
 .members-section,
 .progress-section {
-  background: linear-gradient(135deg, #f9fafb, #f3f4f6); 
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
   padding: 15px;
-  flex: 1; 
+  flex: 1;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
@@ -59,15 +67,88 @@
   justify-content: space-between;
   align-items: center;
   padding: 5px 8px 5px 8px;
-  margin-bottom: 15px; 
+  margin-bottom: 15px;
   border-radius: 12px;
-  background: #f5f5f5 ;
-  color: #4a4a4a; 
+  background: #f5f5f5;
+  color: #4a4a4a;
   transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
+
+.right-code span {
+  display: block;
+  margin-bottom: 10px;
+  color: #f1c40f;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.getCode {
+  background: linear-gradient(90deg, #3498db, #2980b9);
+  /* Gradient button */
+  border: none;
+  color: white;
+  padding: 7px 14px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.right-code span {
+  margin-top: 15px;
+  display: inline-block;
+  color: #0073ff;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.code-val {
+  color: rgb(58, 58, 58);
+  font-style: normal;
+  font-size: 15px;
+  border: 1px solid rgb(224, 224, 224);
+  padding: 5px 10px;
+  border-radius: 10px;
+  margin-left: 10px;
+  background-color: rgb(224, 224, 224);
+}
+
+.copy-btn {
+  font-style: normal;
+  position: relative;
+  left: 10px;
+  top: 3px; 
+  color: rgb(158, 158, 158);
+  cursor: pointer;
+  max-width: max-content;
+
+}
+
+.new-mem {
+  display: flex;
+  justify-content: center;
+}
+
+.addmember {
+  box-shadow: 0px 0px px gray;
+  width: 100%;
+  background-color: #e0e7ff;
+  cursor: pointer;
+
+}
+
+.member-add-icon {
+  margin: auto;
+  font-size: x-large;
+}
+
 .member-card:hover {
-  background: #e0e7ff;  
+  background: #e0e7ff;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -81,6 +162,7 @@
   padding: 2px 3px 2px 3px;
 
 }
+
 .member-contribution {
   padding: 2px 3px 2px 3px;
   color: #212121;
@@ -96,7 +178,7 @@
 }
 
 .progress-bar {
-  background: linear-gradient(90deg, #5a67d8, #4c51bf); 
+  background: linear-gradient(90deg, #5a67d8, #4c51bf);
   height: 100%;
   transition: width 0.4s ease-in-out;
 }
@@ -144,25 +226,26 @@
   font-size: 12px;
   color: #8c8c8c;
 }
+
 .pay-button {
-  background-color: #00796b; 
+  background-color: #00796b;
   color: #ffffff;
-  border: none; 
-  padding: 10px 20px; 
-  cursor: pointer; 
-  transition: background-color 0.3s ease, transform 0.2s ease; 
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 
 }
 
 .pay-button:disabled {
-  background-color: #bdbdbd; 
-  cursor: not-allowed; 
-  box-shadow: none; 
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 .pay-button:hover:not(:disabled) {
   background-color: #025f54;
-  transform: scale(1.02); 
+  transform: scale(1.02);
 }
 
 .pay-dates-calender {
@@ -170,50 +253,49 @@
   justify-content: space-between;
   align-items: center;
   height: 40px;
-  padding: 10px 20px;  
+  padding: 10px 20px;
 }
 
 .pay-dates-calender h4 {
   margin: 0;
   font-size: 1.2rem;
-  color: #e0e0e0; 
-  font-weight: 600; 
+  color: #e0e0e0;
+  font-weight: 600;
 }
 
 .pay-dates-calender button {
   display: flex;
   align-items: center;
-  gap: 10px;  
-  padding: 05px 10px;  
+  gap: 10px;
+  padding: 05px 10px;
   border: none;
-  border-radius: 6px; 
-  color: #ffffff; 
-  font-size: 0.7rem;  
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.7rem;
   font-weight: 500;
   cursor: pointer;
   background: linear-gradient(90deg, #5a67d8, #4c51bf);
-  background-size: 300% 300%;  
+  background-size: 300% 300%;
 
 }
- 
+
 
 .pay-dates-calender button:hover {
   background-color: #434190;
 }
 
 .pay-dates-calender button img {
-  height: 24px;  
+  height: 24px;
   width: auto;
 }
 
 .pay-dates-calender button:disabled {
-  background-color: #888888; 
+  background-color: #888888;
   cursor: not-allowed;
 }
 
-
-
-.success-badge-grp,.error-badge-grp {
+.success-badge-grp,
+.error-badge-grp {
   position: fixed;
   top: 100px;
   right: 20px;
@@ -224,13 +306,26 @@
   font-size: 16px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   z-index: 1000;
-  animation: fadeInOut 10s ease forwards;  
+  animation: fadeInOut 10s ease forwards;
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translateY(-60px); }
-  10%, 90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-60px);top:-60px }
+  0% {
+    opacity: 0;
+    transform: translateY(-60px);
+  }
+
+  10%,
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-60px);
+    top: -60px
+  }
 }
 
 .error-badge-grp {
@@ -243,40 +338,42 @@
   background-color: #9e9c9c;
   padding: 15px;
   border: 1px solid #ddd;
-  border-radius: 8px; 
+  border-radius: 8px;
 }
 
 .upcoming-dates {
   display: flex;
-  justify-content: space-evenly; 
+  justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 30px;
 }
+
 .payment-dates h4 {
   margin-bottom: 10px;
   color: #333;
   font-size: 18px;
 }
 
-.upcoming-dates ul { 
+.upcoming-dates ul {
   padding: 0;
   margin: 0;
 }
 
-.payment-date-item { 
+.payment-date-item {
   border-bottom: 1px solid #eee;
-  background-color: #e0f7fa; 
-  color: #00796b; 
-  padding: 4px 10px; 
-  border-radius: 16px; 
-  font-size: 14px; 
-  font-weight: 500; 
-  display: inline-block; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-  transition: background-color 0.3s ease, transform 0.2s ease; 
+  background-color: #e0f7fa;
+  color: #00796b;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
   &:hover {
-    background-color: #b2ebf2; 
-    transform: scale(1.05);  
+    background-color: #b2ebf2;
+    transform: scale(1.05);
     cursor: pointer;
   }
 }
@@ -291,10 +388,11 @@
   font-size: 16px;
 }
 
-.winner-button,.give-amount-winner {
+.winner-button,
+.give-amount-winner {
   display: inline-block;
-  background: linear-gradient(90deg, #5a67d8, #4c51bf); 
-  color: #ffffff; 
+  background: linear-gradient(90deg, #5a67d8, #4c51bf);
+  color: #ffffff;
   font-weight: 600;
   padding: 8px 16px;
   border: none;
@@ -307,28 +405,29 @@
   position: relative;
   left: 40%;
   padding: 8px;
-  margin-right: 10px; 
+  margin-right: 10px;
 }
- 
+
 .winner-button:hover:not(:disabled) {
   background: #434190;
 }
 
-.winner-button:disabled,.give-amount-winner:disabled {
-  background: #9ca3af;  
-  cursor: not-allowed; 
+.winner-button:disabled,
+.give-amount-winner:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
 }
 
 .winner-animation {
   font-size: 18px;
-  color: #374151; 
+  color: #374151;
   margin-top: 15px;
 }
 
 .winner-result {
   text-align: center;
   background: #fef3c7;
-  color: #b45309;  
+  color: #b45309;
   padding: 10px;
   margin-top: 20px;
   border-radius: 12px;
@@ -338,8 +437,8 @@
 
 .delete-btn-group {
   position: relative;
-  top: 20px; 
-  background-color: #f44336; 
+  top: 20px;
+  background-color: #f44336;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -353,14 +452,14 @@
 }
 
 .delete-btn-group:hover {
-  background-color: #d32f2f;  
+  background-color: #d32f2f;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-  transform: translateY(-2px);  
+  transform: translateY(-2px);
 }
 
 .delete-btn-group:active {
-  background-color: #b71c1c; 
-  transform: translateY(0); 
+  background-color: #b71c1c;
+  transform: translateY(0);
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
@@ -386,7 +485,7 @@
 .faq-section p,
 .next-action-section p {
   font-size: 16px;
-  color: #2d2d2d; 
+  color: #2d2d2d;
 }
 
 .back-button {
@@ -398,17 +497,17 @@
 
 .back-button:hover {
   text-decoration: underline;
-  color: #434190; 
+  color: #434190;
 }
 
-.admin-btn {   
+.admin-btn {
   color: #282727;
   font-size: medium;
-  padding: 7px; 
-  border-radius: 10px; 
+  padding: 7px;
+  border-radius: 10px;
   box-shadow: 0px 0px 3px lightblue;
   font-size: small;
-  
+
 
 
 }
@@ -417,7 +516,7 @@
   padding: 10px 15px;
   font-size: 1rem;
   color: white;
-  background-color: rgb(0, 81, 212);
+  background: linear-gradient(90deg, #3498db, #2980b9);
   border: 1px solid gray;
   border-radius: 5px;
   cursor: pointer;
@@ -426,5 +525,5 @@
 }
 
 .chat-button:hover {
-border-radius: 30px; 
+  border-radius: 30px;
 }

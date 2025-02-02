@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 
 const GroupSchema = new mongoose.Schema(
   {
+    groupCode: {type:String, required:true,  unique: true, },
     name: { type: String, required: true },
     admin: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    adminName:{type:String},
     paymentFrequency: { type: String, default: "monthly" },  
     members: [
       {

@@ -2,8 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import '../styles/HeroStyles.css';
 import { gsap } from 'gsap';
 import { useSelector } from "react-redux";
-import AddBankModal from "../components/AddBankAc";
-import Loader from "../components/Loader";
 import { Link, useNavigate } from 'react-router-dom';
 
 const Hero = () => {

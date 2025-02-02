@@ -8,6 +8,9 @@ import { useSelector } from "react-redux";
 import AddBankModal from "../components/AddBankAc";
 import Loader from "../components/Loader";
 import { useNavigate } from 'react-router-dom';
+import { IoPersonAddOutline } from "react-icons/io5";
+import { MdContentCopy } from "react-icons/md";
+import AddMembersModal from "../components/AddMembers";
 
 const GroupDetails = () => {
   const { groupId } = useParams();
@@ -30,8 +33,18 @@ const GroupDetails = () => {
   const [isRecording, setIsRecording] = useState(false);
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [isGroupWinnerAlreadyDeclared, setIsGroupWinnerAlreadyDeclared] = useState(false);
-const [showingWinnerNow, setshowingWinnerNow] = useState(false);
-const [nameOfWinner, setnameOfWinner] = useState('');
+  const [showingWinnerNow, setshowingWinnerNow] = useState(false);
+  const [nameOfWinner, setnameOfWinner] = useState('');
+  const [fixedLengthMembers, setFixedLengthMembers] = useState('');
+  const [showCode, setshowCode] = useState(false);
+  const [codeVal, setcodeVal] = useState('');
+  const [copyAlert, setCopyAlert] = useState(false);
+
+  const [isModalOpenAddMem, setIsModalOpenAddMem] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpenAddMem(true);
+  const handleCloseModal = () => setIsModalOpenAddMem(false);
+
   const razorpayKey = import.meta.env.REACT_APP_RAZORPAY_KEY;
 
   const user = useSelector((state) => state.user);
@@ -41,7 +54,7 @@ const [nameOfWinner, setnameOfWinner] = useState('');
   const backendUrl = import.meta.env.VITE_FRONTEND_URL
 
   const navigate = useNavigate();
- 
+
 
   useEffect(() => {
     const fetchGroupDetails = async () => {
@@ -52,8 +65,8 @@ const [nameOfWinner, setnameOfWinner] = useState('');
         }
         const data = await response.json();
 
-          setGroupDetails(data);
-
+        setGroupDetails(data);
+        setFixedLengthMembers(data.rules.maxMembers)
         const calculatedEndDate = calculateEndDate(data.createdAt, data.members.length);
         setEndDate(calculatedEndDate.toISOString().split("T")[0]);
 
@@ -62,7 +75,6 @@ const [nameOfWinner, setnameOfWinner] = useState('');
         setError(err.message);
       }
     };
-
     fetchGroupDetails();
     checkEligibleForAcAdd();
     checkForAdmin();
@@ -263,39 +275,38 @@ const [nameOfWinner, setnameOfWinner] = useState('');
     }
   };
 
-
   const IsGroupWinnerAlreadyDeclared = async () => {
     try {
       const response = await fetch(`${backendUrl}/new-grp/get-latest-winner-date/${groupId}`, {
-        method:"POST",
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({groupId})
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ groupId })
       })
-      const data =await response.json();
+      const data = await response.json();
       setIsGroupWinnerAlreadyDeclared(data.success)
       setnameOfWinner(data.latestWinner.name)
       setshowingWinnerNow(showingWinner(data.latestWinner.createdAt))
-       
+
     } catch (error) {
       console.log(error)
     }
   }
 
   const showingWinner = (latestWinnerDate) => {
-     const winnerDate = new Date(latestWinnerDate).getDate();
-     const winnerMonth = new Date(latestWinnerDate).getMonth();
-     const winnerYear = new Date(latestWinnerDate).getFullYear();
+    const winnerDate = new Date(latestWinnerDate).getDate();
+    const winnerMonth = new Date(latestWinnerDate).getMonth();
+    const winnerYear = new Date(latestWinnerDate).getFullYear();
 
-     const today = new Date();
-    
-     if(today.getDate() === winnerDate && today.getMonth() === winnerMonth && today.getFullYear() === winnerYear) {
-     return true;
-     }
-     return false;
-  } 
+    const today = new Date();
 
- 
-  
+    if (today.getDate() === winnerDate && today.getMonth() === winnerMonth && today.getFullYear() === winnerYear) {
+      return true;
+    }
+    return false;
+  }
+
+
+
 
   const handleOpenChat = () => {
     navigate(`/chat/${groupId}`);
@@ -312,7 +323,7 @@ const [nameOfWinner, setnameOfWinner] = useState('');
       </div>
     );
   }
- 
+
   if (!groupDetails) {
     return (
       <>
@@ -325,6 +336,10 @@ const [nameOfWinner, setnameOfWinner] = useState('');
   groupDetails.members.forEach((member) => {
     totalSum += member.contributionsPaid;
   });
+
+  let presentMembers = groupDetails.members;
+  let presentMembersLength = presentMembers.length;
+
 
 
   const selectWinner = async () => {
@@ -431,44 +446,47 @@ const [nameOfWinner, setnameOfWinner] = useState('');
   calculatePaymentDates();
 
   const addPaymentDatesToCalendar = async () => {
-    setcalenderWorking(true);
+    // setcalenderWorking(true);
 
-    try {
+    alert('this feature facing some errors')
+    // try {
 
-      if (!Array.isArray(paymentDates) || paymentDates.length === 0) {
-        setSuccessMsg("Please select at least one valid date.");
-        setcalenderWorking(false);
-        return;
-      }
+    //   if (!Array.isArray(paymentDates) || paymentDates.length === 0) {
+    //     setSuccessMsg("Please select at least one valid date.");
+    //     setcalenderWorking(false);
+    //     return;
+    //   }
 
-      const response = await fetch(`${backendUrl}/calender/add-payment-dates`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dates: paymentDates, userId, groupId }),
-      });
+    //   const response = await fetch(`${backendUrl}/calender/add-payment-dates`, {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ dates: paymentDates, userId, groupId }),
+    //   });
 
-      const data = await response.json();
+    //   const data = await response.json();
 
-      if (response.ok) {
+    //   if (response.ok) {
 
-        setSuccessMsg(data.message || "Events successfully added to the calendar.");
-      } else {
+    //     setSuccessMsg(data.message || "Events successfully added to the calendar.");
+    //   } else {
 
-        if (response.status === 401 || response.status === 403) {
-          setSuccessMsg("Authentication required. Redirecting...");
-          window.location.href = `${backendUrl}/auth/google`;
-        } else if (data.error) {
-          seterrorMessge(data.error);
-        } else {
-          setSuccessMsg("Failed to add events to the calendar. Please try again.");
-        }
-      }
-    } catch (error) {
-      console.error("Error adding to calendar:", error.message);
-      setSuccessMsg("An unexpected error occurred. Please try again later.");
-    } finally {
-      setcalenderWorking(false);
-    }
+    //     if (response.status === 401 || response.status === 403) {
+    //       setSuccessMsg("Authentication required. Redirecting...");
+    //       window.location.href = `${backendUrl}/auth/google`;
+    //     } else if (data.error) {
+    //       seterrorMessge(data.error);
+    //       window.location.href = `${backendUrl}/auth/google`;
+    //     } else {
+    //       setSuccessMsg("Failed to add events to the calendar. Please try again.");
+    //       window.location.href = `${backendUrl}/auth/google`;
+    //     }
+    //   }
+    // } catch (error) {
+    //   console.error("Error adding to calendar:", error.message);
+    //   setSuccessMsg("An unexpected error occurred. Please try again later.");
+    // } finally {
+    //   setcalenderWorking(false);
+    // }
   };
 
   const progress = calculateTimeProgress(groupDetails.createdAt, endDate);
@@ -504,32 +522,59 @@ const [nameOfWinner, setnameOfWinner] = useState('');
     // }
   }
 
+  const getCodeGrp = (groupId) => {
+
+    setshowCode((prev) => !prev)
+    setcodeVal('jsjndsn')
+
+  }
+
+  const handleCopy = (grpcode) => {
+    navigator.clipboard.writeText(grpcode);
+    setCopyAlert(true);
+    setTimeout(() => setCopyAlert(false), 2000);
+};
+
 
 
   return (
     <div className="body-main">
       <Header />
       <div className="group-details">
-        <header className="group-header">
-          <h1 className="group-name">{groupDetails.name} </h1>
+        <h1 className="group-name">{groupDetails.name} </h1>
 
-          <p className="group-dates">
-            <strong>Start Date:</strong>{" "}
-            {new Date(groupDetails.createdAt).toLocaleDateString()} |{" "}
-            <strong>End Date:</strong> {new Date(endDate).toLocaleDateString()}
-          </p>
-          <p className="total-money">
-            <strong>Total Money in Group:</strong> Rs. {totalSum}
-          </p>
+        <hr />
+        <div className="top-grp-details">
 
+          <header className="group-header left">
 
+            <p className="group-dates">
+              <strong>Start Date:</strong>{" "}
+              {new Date(groupDetails.createdAt).toLocaleDateString()} |{" "}
+              <strong>End Date:</strong> {new Date(endDate).toLocaleDateString()}
+            </p>
+            <p className="total-money">
+              <strong>Total Money in Group:</strong> Rs. {totalSum}
+            </p>
 
-          <button className="chat-button" onClick={handleOpenChat} >
-            💬 Chat with Group
-          </button>
+            <button className="chat-button" onClick={handleOpenChat} >
+              💬 Chat with Group
+            </button>
 
-        </header>
-
+          </header>
+          <header className="right" >
+            <div className="right-code">
+              <span style={{ color: 'darkgoldenrod' }}>To add the members click on get code and share with them.</span> <br />
+              <button onClick={() => getCodeGrp(groupId)} className="getCode" >{showCode?'hide code':'Invite code'}</button> <br />
+              {showCode && <span className="code-text">your code for group is: 
+                <yash className="code-val" >{groupDetails.groupCode}</yash>
+                <cpy className='copy-btn' role='button' onClick={() => handleCopy(groupDetails.groupCode)} >
+               {copyAlert? '✅ Code Copied':<MdContentCopy/>} 
+                </cpy>
+               </span>}
+            </div>
+          </header>
+        </div>
         <main className="group-main">
           <div className="members-section">
             <h3>Members</h3>
@@ -544,17 +589,20 @@ const [nameOfWinner, setnameOfWinner] = useState('');
                           <div className="link-bank-hover-container">
                             <small style={{ color: "gray" }}>It's you 😊</small>
                             <div className="link-bank-container">
-
                               {isEligbleForBankAc ? (
                                 <>
-                                  <button className="link-btn-ac" onClick={() => setModelOpen(true)}>Link Bank</button>
+                                  <button className="link-btn-ac" onClick={() => setModelOpen(true)}>
+                                    Link Bank
+                                  </button>
                                   <span className="span-text-link">
                                     This A/C will be used for crediting the balance to the winner.
                                   </span>
                                 </>
                               ) : (
                                 <>
-                                  <button className="link-btn-ac" disabled>Already Linked</button>
+                                  <button className="link-btn-ac" disabled>
+                                    Already Linked
+                                  </button>
                                   <span className="span-text-link">
                                     A/C is already saved. To edit, please visit the dashboard section.
                                   </span>
@@ -582,9 +630,22 @@ const [nameOfWinner, setnameOfWinner] = useState('');
                   </div>
                 </li>
               ))}
+              {fixedLengthMembers > presentMembersLength ? (
+                <div className="new-mem">
+                  <li className="member-card addmember open-modal-button" role="button" onClick={handleOpenModal}>
+                     
+                    <div className="member-add-icon">
+                      <IoPersonAddOutline />
+                    </div>
+                     
+                  </li>
+                </div>
+              ) : (
+                ''
+              )}
             </ul>
-          </div>
 
+          </div>
           <div className="progress-section">
             <h3>Group Expiry Progress</h3>
             {isAdmin && <span className="admin-btn">You are the group admin</span>} <br />
@@ -637,7 +698,7 @@ const [nameOfWinner, setnameOfWinner] = useState('');
               <div className="winner-result" >
                 <p>🎊 This month's winner is:</p>
                 <h2>{selectedWinner}</h2>
-                <button  className="give-amount-winner" onClick={() => alert("Not getting the payouts api for now so now this is static ")}  >give amount</button>
+                <button className="give-amount-winner" onClick={() => alert("Not getting the payouts api for now so now this is static ")}  >give amount</button>
               </div>
 
             )} <br />
@@ -645,15 +706,14 @@ const [nameOfWinner, setnameOfWinner] = useState('');
             {selectingError}
 
             {showingWinnerNow && (
-                <div className="winner-result" >
+              <div className="winner-result" >
                 <p>🎊 Results are out winner is:</p>
                 <h2>{nameOfWinner}</h2>
-                {isAdmin &&    <button  className="give-amount-winner" onClick={() => alert("Not getting the payouts api for now so now this is static ")}  >give amount</button>} <br />
+                {isAdmin && <button className="give-amount-winner" onClick={() => alert("Not getting the payouts api for now so now this is static ")}  >give amount</button>} <br />
 
-                 </div>
+              </div>
             )
-             }
-            
+            }
 
             <div className="payment-dates">
               <div className="pay-dates-calender">
@@ -712,6 +772,7 @@ const [nameOfWinner, setnameOfWinner] = useState('');
 
         </footer>
       </div>
+
       <Footer />
       <AddBankModal isOpen={modelOpen} onClose={() => setModelOpen(false)} userId={userId} />
       {successMsg && (
@@ -719,6 +780,11 @@ const [nameOfWinner, setnameOfWinner] = useState('');
           {successMsg}
         </div>
       )}
+
+<AddMembersModal
+                isModalOpenAddMem={isModalOpenAddMem}
+                closeModal={handleCloseModal}
+            />
 
       {errorMessge && (
         <div className="error-badge-grp">
@@ -728,5 +794,7 @@ const [nameOfWinner, setnameOfWinner] = useState('');
     </div>
   );
 };
+
+
 
 export default GroupDetails;

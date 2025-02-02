@@ -22,9 +22,9 @@ const Footer = () => {
         </div>
         <div className="footer_section footer_contact">
           <h4 className="footer_section-title">Contact Me</h4>
-          <p>Email: <a href="mailto:yashsabne39@gmail.com" className="footer_link">yashsabne39@gmail.com  </a></p>
+          <p>Email: <a href="mailto:yashsabne39@gmail.com" className="footer_link" target='_blank' >yashsabne39@gmail.com  </a></p>
           <p>GitHub: <a href="https://github.com/yashsabne" className="footer_link" target='_blank' >github.com/yashsabne</a></p>
-          <p>LinkedIn: <a href="https://www.linkedin.com/in/yash-sabne-77239b287/" className="footer_link">linkedin.com/in/yashsabne</a></p>
+          <p>LinkedIn: <a href="https://www.linkedin.com/in/yash-sabne-77239b287/" className="footer_link" target='_blank'>linkedin.com/in/yashsabne</a></p>
         </div>
         <div className="footer_section imageLogo">
 
@@ -32,7 +32,7 @@ const Footer = () => {
            </div>
       </div>
       <div className="footer_bottom">
-        <p>&copy; 2025 LendLink. Made with ❤️ by a yash sabne exploring advanced web-D.</p>
+        <p>&copy;  2024 - {new Date().getFullYear()} LendLink. Made with ❤️ by a yash sabne exploring advanced web-D.</p>
       </div>
     </footer>
   );

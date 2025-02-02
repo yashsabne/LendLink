@@ -30,8 +30,7 @@ router.get('/info/:userId', async (req,res) => {
     })
 
     const bankDetails  = await BankDetails.findOne({userId});
-
-    console.log(bankDetails)
+ 
 
     if(bankDetails == null) {
       res.status(202).json({personalInfo});

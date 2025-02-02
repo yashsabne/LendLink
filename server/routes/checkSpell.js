@@ -9,8 +9,7 @@ router.post('/correct-text', async (req, res) => {
     const key = process.env.GOOGLE_SECRET_KEY_GEMINI
 
     const { text } = req.body;
-
-    console.log(text)
+ 
     if (!text) {
         return res.status(400).json({ error: 'Text is required' });
     }
@@ -24,8 +23,7 @@ router.post('/correct-text', async (req, res) => {
     const result = await model.generateContent(prompt);
 
         const correctedText = result.response.text();
-
-        console.log(correctedText)
+ 
 
         res.json({ correctedText });
     } catch (error) {
@@ -43,8 +41,7 @@ router.post('/getmemberdetails', async (req,res) => {
      }
      const group = await Group.findById(groupId);
 
-     const members = group.members;
-     console.log(members);
+     const members = group.members; 
 
      if(!members) {
         res.status(404).json({message:'members not available', success:false})

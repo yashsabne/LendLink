@@ -1,10 +1,8 @@
-const express = require("express");
-const mongoose = require("mongoose");
+const express = require("express"); 
 const router = express.Router();
 const Group = require("../models/GroupSchema");
 const User = require("../models/User");
 const nodemailer = require('nodemailer');
-const { admin } = require("googleapis/build/src/apis/admin");
 
 router.post("/create-new", async (req, res) => {
   try {
@@ -16,8 +14,21 @@ router.post("/create-new", async (req, res) => {
       });
     }
 
+    const adminData = await User.findById(adminId);
+    const adminName = adminData.name;
+
+    function generateGroupCode() {
+      const randomString = Math.random().toString(36).substring(2, 8).toUpperCase();
+      const timestamp = Date.now().toString(36).toUpperCase();  
+      return `${randomString}yash${timestamp}`; 
+  }
+  const groupCode = generateGroupCode();
+ 
+
     const newGroup = new Group({
+      groupCode,
       name,
+      adminName:adminName,
       admin: adminId,
       rules,
       members: [],
@@ -46,10 +57,7 @@ router.post("/create-new", async (req, res) => {
             name: name,
             groupId: newGroup._id,
           });
-
-          console.log(adminId)
-          console.log(user._id, 'userId')
-
+ 
           const message =
             adminId === user._id.toString()
               ? `You created this group "${name}".`
@@ -146,8 +154,7 @@ router.get("/group/:groupId", async (req, res) => {
   router.post("/group/:groupId/select-winner/:totalSum", async (req, res) => {
     try {
       const { groupId, totalSum } = req.params; 
-
-      console.log(totalSum)
+ 
 
       const group = await Group.findById(groupId);
 
@@ -224,9 +231,6 @@ router.get("/group/:groupId", async (req, res) => {
               }
 
             })
-
-            console.log(totalContributions)
-
             return {
               groupId: groupId,
               groupName: group.name,
@@ -331,6 +335,193 @@ router.post('/get-latest-winner-date/:groupId',async (req,res) => {
   } catch (error) {
     return res.status(500).json({success: false });
   }
-} )
+})
+
+router.post('/join-new-grp' , async (req,res) => {
+  try {
+    const { groupIdJoin, userId } = req.body;
+   
+    if(!groupIdJoin) {
+      res.status(404).json({message:'groupIdJoin not reached to us'})
+    }
+    const invitedGroup =  await Group.findOne({groupCode:groupIdJoin})
+ 
+    if(!invitedGroup) {
+      res.status(404).json({message:'no such group exist as far i know!',success:false})
+    }
+    else {
+      res.status(200).json({invitedGrp:invitedGroup,sucess:true});
+    }
+
+   
+  } catch (error) {
+    res.status(500).json({ message: "Internal errror in fetching group details", error: error.message });
+  }
+})
+
+router.post('/confirm-join', async (req, res) => {
+  try {
+    const { adminId, groupId, userId } = req.body;
+
+    if (!adminId || !groupId || !userId) {
+      return res.status(404).json({ message: 'Required data not found', success: false });
+    }
+
+    const group = await Group.findById(groupId);
+    const user = await User.findById(adminId);
+    const member = await User.findById(userId); 
+
+    if (!group || !user || !member) {
+      return res.status(404).json({ message: 'Group or User not found', success: false });
+    }
+
+    user.notifications.push({
+      message: `You have a request for approval from a member. 
+      <a target="_blank" href="http://localhost:5173/approve-request?groupId=${groupId}&userId=${userId}" 
+         style="color: salmon; text-decoration: underline;">
+         Click here
+      </a> to approve.`,
+    });
+ 
+    await user.save();
+
+    res.json({ message: 'Request sent for approval with admin', success: true });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server Error', success: false });
+  }
+});
+router.post('/approve-user', async (req, res) => {
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+
+  const sendEmail = async (to, subject, message) => {
+    try {
+      await transporter.sendMail({
+        from: "LendLink team" + process.env.OWNER_EMAIL, 
+        to,
+        subject,
+        html: message,
+      });
+      console.log(`Email sent to ${to}`);
+    } catch (error) {
+      console.error("Error sending email:", error);
+    }
+  };
+
+  try {
+    const { groupId, userId } = req.body;
+
+    if (!groupId || !userId) { 
+      return res.status(400).json({ message: 'Group ID and User ID are required',sucess:false });
+    }
+
+    const group = await Group.findById(groupId);
+    const user = await User.findById(userId);    
+
+    const grpMaxMembers = group.rules.maxMembers;
+    const currGrpMembers = group.members.length;
+
+    console.log(grpMaxMembers, currGrpMembers)
+
+    if (!group || !user) { 
+      return res.status(404).json({ message: 'Group or User not found',sucess:false });
+    }
+
+    const userExists = group.members.some(member => member.userId.toString() === userId);
+
+    if (userExists) {
+      await sendEmail(
+        user.email,
+        "Group Membership Update",
+        `<p>You are already a member of the group <b>${group.name}</b>.</p>`
+      );
+      return res.status(400).json({ message: 'User is already a member',sucess:false });
+    }
+
+    if(grpMaxMembers<currGrpMembers) {
+      group.members.push({
+        userId: userId,
+        name: user.name,
+        email: user.email,
+        status: 'active',
+      });
+  
+      user.groups.push({
+        name: group.name,
+        groupId: groupId
+      });
+  
+      await group.save();
+  
+      user.notifications.push({
+        message: `Your request to join the group <b> "${group.name}" </b> has been approved.`,
+      });
+
+      await sendEmail(
+        user.email,
+        "Group Request Approved",
+        `<p>Congratulations! Your request to join the group <b>${group.name}</b> has been approved.</p>`
+      );
+      
+      await user.save();
+  
+      res.json({ message: 'User approved and added to the group successfully', success: true });
+  
+    }
+    else {
+      await sendEmail(
+        user.email,
+        "Group Membership Request Denied",
+        `<p>Sorry, the group <b>${group.name}</b> has reached its maximum member limit. Your request cannot be approved.</p>`
+      );
+
+
+      res.json({ message: 'Group max members limits are fulled so cannot approve', success: false });
+  
+    }
+ 
+ 
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error', success: false });
+  }  
+});
+
+
+
+router.get('/user-details', async (req, res) => {
+  try {
+    const { userId } = req.query;
+
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is required' });
+    }
+
+    const user = await User.findById(userId);
+    
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ name: user.name, email: user.email });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 
 module.exports = router;

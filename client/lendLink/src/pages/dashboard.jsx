@@ -6,13 +6,14 @@ import "../styles/Dashboard.css";
 import { Link, useNavigate } from "react-router-dom";
 import { FaPlusCircle } from "react-icons/fa";
 import gsap from "gsap";
-import PersonalInfoModal from "../components/PersonalInfoModal"; 
+import PersonalInfoModal from "../components/PersonalInfoModal";
 import { useMediaQuery } from 'react-responsive';
 import Loader from "../components/Loader";
-    
+import GroupModal from "../components/GroupJoinModal";
+
 const Dashboard = () => {
 
-  
+
   const backendUrl = import.meta.env.VITE_FRONTEND_URL
 
 
@@ -24,17 +25,20 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
-  const [groupId, setGroupId] = useState("");
+  const [groupIdJoin, setGroupId] = useState("");
   const [newGroupName, setNewGroupName] = useState("");
   const [notifications, setNotifications] = useState([]);
   const [activeSidebar, setActiveSidebar] = useState("dashboard");
   const [showSetting, setShowSetting] = useState(false);
-  const [personalModelOpen, setPersonalModelOpen] = useState(false); 
+  const [personalModelOpen, setPersonalModelOpen] = useState(false);
   const isMobile = useMediaQuery({ maxWidth: 1000 });
-  const [isSidebarVisible, setIsSidebarVisible] = useState(isMobile?false:true);
-    const [successMsg, setSuccessMsg] = useState("");
+  const [isSidebarVisible, setIsSidebarVisible] = useState(isMobile ? false : true);
+  const [successMsg, setSuccessMsg] = useState("");
+  const [showModal, setShowModal] = useState(false); 
+  const [groupDetails, setGroupDetails] = useState(null);
+  const [btnLoad, setbtnLoad] = useState(false);
 
- 
+
 
   useEffect(() => {
     const fetchUserGroups = async () => {
@@ -43,12 +47,10 @@ const Dashboard = () => {
         if (!response.ok) {
           throw new Error("Failed to fetch group details");
         }
-        const data = await response.json(); 
-
-        console.log(data)
+        const data = await response.json();
 
         setGroupData(data?.groupDetails || []);
- 
+
 
         setNotifications(
           data.notifications.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
@@ -60,7 +62,7 @@ const Dashboard = () => {
       }
     };
     if (userId) {
-      
+
       fetchUserGroups();
     }
   }, [userId]);
@@ -72,14 +74,14 @@ const Dashboard = () => {
       { opacity: 1, y: 0, stagger: 0.5, ease: "power3.inOut", duration: 2 }
     );
   }, []);
-  
+
   let TotalContri = 0;
- 
+
   groupData.forEach((group) => {
     TotalContri += group.totalContributions
-  } )
- 
- 
+  })
+
+
 
   const handleSidebarClick = (menuItem) => {
     setActiveSidebar(menuItem);
@@ -89,13 +91,46 @@ const Dashboard = () => {
     setIsSidebarVisible((prev) => !prev);
   };
 
-  const handleJoinGroup = () => {
-    if (!groupId) {
+  const handleJoinGroup = async () => {
+    setbtnLoad(true);
+    if (!groupIdJoin) {
       setMessage("Please enter a group ID.");
       return;
     }
-    setMessage(`Joining group with ID: ${groupId}`);
-    setGroupId("");
+    try {
+      const response  = await fetch(`${backendUrl}/new-grp/join-new-grp`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ groupIdJoin, userId })
+      })
+      const data = await response.json();
+      console.log(data)
+      const todayDate = new Date();
+
+      if(data.success === false) {
+        setMessage(data.message);
+      }    
+      const startDate = new Date(data.invitedGrp.createdAt)
+      console.log(startDate)
+      if(startDate.getDate() === todayDate.getDate() && 
+      startDate.getMonth() === todayDate.getMonth() && 
+      startDate.getFullYear() === todayDate.getFullYear()) {
+        setShowModal(true); 
+        setGroupDetails(data.invitedGrp); 
+        setbtnLoad(false)
+      }
+      else {
+        setbtnLoad(false)
+
+        setMessage("group inviting date is gone you cannot proceed now!");
+      }
+
+    } catch (err) {
+      console.error("Error in handleJoinGroup:", err);
+      // setMessage("An error occurred: " + (err.message || err));
+    }
+   
+
   };
 
   const handleCreateGroup = () => {
@@ -110,6 +145,7 @@ const Dashboard = () => {
   const handleOpenSetting = () => {
     setShowSetting((prevState) => !prevState);
   };
+
 
   const showPersonalDetails = () => {
     setPersonalModelOpen(true);
@@ -131,68 +167,68 @@ const Dashboard = () => {
   }
 
   return loading ? (
-    <div> <Loader/> </div>
-  ) : ( 
+    <div> <Loader /> </div>
+  ) : (
     <>
       <Header />
 
       {successMsg && (
-            <div className="success-badge-grp">
-              {successMsg}
-            </div>
-          )}
-   
+        <div className="success-badge-grp">
+          {successMsg}
+        </div>
+      )}
+
       <div className={`dash-wrapper ${isSidebarVisible ? "" : "sidebar-hidden"}`}>
-     
+
         <aside className={`dash-sidebar ${isSidebarVisible ? "" : "hidden"}`}>
-      
-          
-        <button className="sidebar-toggle-in" onClick={toggleSidebar}>
+
+
+          <button className="sidebar-toggle-in" onClick={toggleSidebar}>
             {isSidebarVisible ? "X" : "≡"}
           </button>
-        
+
           <h2 className="dash-sidebar-title">LendLink</h2>
           <ul className="dash-sidebar-menu">
             <a href="#dashboard">
-            <li
-              className={`dash-menu-item ${activeSidebar === "dashboard" ? "active" : ""}`}
-              onClick={() => handleSidebarClick("dashboard")}
-            >
-              
-              Dashboard
-            </li>
+              <li
+                className={`dash-menu-item ${activeSidebar === "dashboard" ? "active" : ""}`}
+                onClick={() => handleSidebarClick("dashboard")}
+              >
+
+                Dashboard
+              </li>
             </a>
             <a href="#myGroups">
-            <li
-              className={`dash-menu-item ${activeSidebar === "myGroups" ? "active" : ""}`}
-              onClick={() => handleSidebarClick("myGroups")}
-            >
-              My Groups
-            </li>
+              <li
+                className={`dash-menu-item ${activeSidebar === "myGroups" ? "active" : ""}`}
+                onClick={() => handleSidebarClick("myGroups")}
+              >
+                My Groups
+              </li>
             </a>
             <a href="#exploreGroups">
-            <li
-              className={`dash-menu-item ${activeSidebar === "explore" ? "active" : ""}`}
-              onClick={() => handleSidebarClick("explore")}
-            >
-              Explore Groups
-            </li>
+              <li
+                className={`dash-menu-item ${activeSidebar === "explore" ? "active" : ""}`}
+                onClick={() => handleSidebarClick("explore")}
+              >
+                Explore Groups
+              </li>
             </a>
             <a href="#recentActivites">
-            <li
-              className={`dash-menu-item ${activeSidebar === "history" ? "active" : ""}`}
-              onClick={() => handleSidebarClick("history")}
-            >
-              History
-            </li>
-            </a> 
+              <li
+                className={`dash-menu-item ${activeSidebar === "history" ? "active" : ""}`}
+                onClick={() => handleSidebarClick("history")}
+              >
+                History
+              </li>
+            </a>
             <li
               className={`dash-menu-item ${activeSidebar === "settings" ? "active" : ""}`}
               onClick={() => handleOpenSetting()}
             >
               {showSetting ? "Hide" : "Settings"}
             </li>
- 
+
 
             {showSetting && (
               <div className="personal-setting">
@@ -205,12 +241,12 @@ const Dashboard = () => {
               </div>
             )}
           </ul>
-          
-    
+
+
         </aside>
         <button className="sidebar-toggle" onClick={toggleSidebar}>
-            {isSidebarVisible ? "X" : "≡"}
-          </button>
+          {isSidebarVisible ? "X" : "≡"}
+        </button>
 
         <PersonalInfoModal isOpen={personalModelOpen} onClose={closePersonalModal} userId={userId} />
 
@@ -234,26 +270,27 @@ const Dashboard = () => {
             <div className="dash-insight-notification">
               <h3>Notification Center</h3>
               <ul>
-              {notifications.length === 0 ? 'No notifications' : 
-  notifications.slice(0, 10).map((notification, i) => (
-    <li className="notification-list" key={i}>
-      {notification.message}{" "}
-      <small>at {new Date(notification.timestamp).toLocaleDateString()}</small>
-    </li>
-  ))
-}
+                {notifications.length === 0 ? 'No notifications' :
+                  notifications.slice(0, 10).map((notification, i) => (
+                    <div className="notification-list-div">
+                    <li className="notification-list" key={i} dangerouslySetInnerHTML={{ __html: notification.message }}>          
+                       </li>
+                         <small className="notification-list" > - at {new Date(notification.timestamp).toLocaleTimeString() + ' - ' + new Date(notification.timestamp).toLocaleDateString() }</small>
+                         </div>
+                  ))
+                }
 
-                
+
               </ul>
             </div>
           </section>
           <section className="dash-my-groups" id="myGroups">
             <h2>
               My Groups{" "}
-              <a  href="#exploreGroups">
-              <FaPlusCircle
-                style={{ cursor: "pointer", marginTop: "8px" }}
-              />
+              <a href="#exploreGroups">
+                <FaPlusCircle
+                  style={{ cursor: "pointer", marginTop: "8px" }}
+                />
               </a>
             </h2>
             {loading && <p>Loading groups...</p>}
@@ -270,13 +307,7 @@ const Dashboard = () => {
               ))}
             </ul>
           </section>
-          <section className="dash-recent-activities" id="recentActivites">
-            <h2>Recent Activities</h2>
-            <ul className="dash-activity-list">
-              <li>yash sabne made this app</li>
-              <li>Feature is under work</li> 
-            </ul>
-          </section>
+    
           <div className="dash-info-card" id="exploreGroups">
             <h3>Manage Your Groups</h3>
             <div className="dash-group-create-section">
@@ -302,7 +333,7 @@ const Dashboard = () => {
             </div>
 
             <div className="dash-group-join-section">
-              <h4>Join an Existing Group</h4>
+              <h4>Join an Existing Group <small>(you can join only within one day of creation of group)</small> </h4>
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
@@ -312,16 +343,31 @@ const Dashboard = () => {
                 <input
                   type="text"
                   placeholder="currently this feature is in work"
-                  value={groupId}
+                  value={groupIdJoin}
                   onChange={(e) => setGroupId(e.target.value)}
                   className="dash-input"
-                />
-                <button type="submit" className="dash-button disabled-btn" disabled >
-                  Join Group
+                /> 
+                <button type="submit" className="dash-button" disabled={btnLoad}  >
+                {btnLoad? 'Getting info' : 'Join Group' }
                 </button>
               </form>
+
+
+              {showModal && (
+                <GroupModal
+                  groupDetails={groupDetails}
+                  onClose={() => setShowModal(false)}
+                />
+              )}
             </div>
           </div>
+          <section className="dash-recent-activities" id="recentActivites">
+            <h2>Recent Activities</h2>
+            <ul className="dash-activity-list">
+              <li>yash sabne made this app</li>
+              <li>Feature is under work</li>
+            </ul>
+          </section>
         </main>
       </div>
       <Footer />

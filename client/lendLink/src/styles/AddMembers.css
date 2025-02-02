@@ -1,0 +1,103 @@
+.modal-addMem {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 700px;
+    min-height: 500px;
+}
+ 
+.modal-addMem-content {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    position: relative;
+}
+
+/* Form fields styling */
+form input[type="text"],
+form input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+.btns-addMem {
+    display: flex;
+    justify-content: space-between;
+} 
+
+.add-member-btn,
+.remove-member-btn {
+ 
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-member-btn:hover {
+    background-color: #0056b3;
+}
+
+.remove-member-btn {
+    background-color: #dc3545;
+    margin-left: 10px;
+}
+
+.remove-member-btn:hover {
+    background-color: #c82333;
+   
+} 
+.submit-btn {
+    padding: 7px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #28a745;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+     
+}
+
+ 
+.close-modal-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6c757d; 
+    border: none;
+    border-radius: 6px;
+    cursor: pointer; 
+    font-size: large;
+}
+ 
+ 
